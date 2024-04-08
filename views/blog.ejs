@@ -37,6 +37,7 @@
         id="comment-input"
         placeholder="Enter your comment here..."
         class="form-control"
+        autocomplete="off"
       />
       <button class="btn btn-success my-3" type="submit" id="submitBtn">
         Save
@@ -50,6 +51,7 @@
       <div class="container">
         <% comments.forEach(comment=> { %>
         <h6><%- comment.createdBy.fullName %> : <%- comment.content %></h6>
+        <hr>
         <% }) %>
       </div>
     </div>

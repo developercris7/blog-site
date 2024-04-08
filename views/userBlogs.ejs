@@ -6,39 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My blogs</title>
     <style>
+      .img-container {
+        height: 200px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      @media (767px<=width<=991px) {
         .img-container {
-         height: 200px;
-          overflow: hidden;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          height: 140px;
         }
-        @media(767px<=width<=991px){
-          .img-container{
-            height: 140px;
-          }
-        }
-      </style>
+      }
+    </style>
   </head>
   <body>
     <%- include('./partials/components/nav.ejs') %>
 
     <div class="container">
-        <% if (locals.blogs && blogs.length > 0) { %>
-        <div class="row">
-          <% blogs.forEach(blog => { %>
-          <div class="col-md-4 my-2">
+      <% if (locals.blogs && blogs.length > 0) { %>
+      <div class="row">
+        <% blogs.forEach(blog => { %>
+        <div class="col-md-4 my-2">
+          <a
+            href="/blog/view/<%-blog._id%>"
+            class="text-decoration-none text-dark"
+          >
             <div class="card w-100" style="width: 18rem">
               <div class="img-container py-2">
                 <img
-                src="https://blog-site-i89v.onrender.com/public/uploads/<%- blog.coverImage %>"
-                class="card-img-top w-100"
-                alt="..."
-              />
+                  src="https://blog-site-i89v.onrender.com/public/uploads/<%- blog.coverImage %>"
+                  class="card-img-top w-100"
+                  alt="..."
+                />
               </div>
               <div class="card-body px-2 pb-3">
                 <h5 class="card-title m-0">
-                  <%- blog.title.slice(0,20)%> <% if (blog.title.length > 20) { %>
+                  <%- blog.title.slice(0,20)%> <% if (blog.title.length > 20) {
+                  %>
                   <span>...</span>
                   <% } %>
                 </h5>
@@ -46,23 +51,28 @@
                   <p><%-blog.views%> view(s)</p>
                   <p class="m-0"><%-createTimeStamp(blog.createdAt)%></p>
                 </div>
-                
-                <div class="d-flex justify-content-between">
-                    <a href="/blog/view/<%-blog._id%>" class="btn btn-primary">View</a>
-                    <button class="btn btn-danger">
-                        <a href="/user/deleteBlog/<%=blog._id%>" class="nav-link">Delete</a>
-                      </button>
+
+
+                <div class="d-flex">
+                  <button class="btn btn-primary">
+                    <a href="/blog/view/<%-blog._id%>" class="nav-link ">View</a>
+                  </button>
+                  <button class="btn btn-danger mx-4">
+                    <a href="/user/deleteBlog/<%=blog._id%>" class="nav-link"
+                      >Delete</a>
+                  </button>
                 </div>
               </div>
             </div>
-          </div>
-          <% }) %>
+          </a>
         </div>
-        <% } else {%>
-        <h2>No Blogs Available !</h2>
-        <% } %>
+        <% }) %>
       </div>
-  
+      <% } else {%>
+      <h2>No Blogs Available !</h2>
+      <% } %>
+    </div>
+
     <!-- Bootsrap JS cdn -->
     <%- include('./partials/js/bootstrap.ejs') %>
   </body>

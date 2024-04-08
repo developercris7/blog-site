@@ -28,6 +28,7 @@
       <div class="row">
         <% blogs.forEach(blog => { %>
         <div class="col-md-4 my-2">
+          <a href="/blog/view/<%-blog._id%>" class="text-decoration-none text-dark">
           <div class="card w-100" style="width: 18rem">
             <div class="img-container py-2">
               <img
@@ -51,6 +52,7 @@
               >
             </div>
           </div>
+        </a>
         </div>
         <% }) %>
       </div>
