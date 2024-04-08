@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(cors())
 app.use(cookieParser())
 app.use(checkToken)
-app.use(express.static('public'))
+app.use("/public",express.static('./public'))
 
 // routers
 app.use("/",staticRouter)
