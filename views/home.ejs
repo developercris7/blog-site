@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/css/bootstrap.ejs') %>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <style>
+      .img-container {
+        height: 200px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      @media (767px<=width<=991px) {
+        .img-container {
+          height: 140px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./partials/components/nav.ejs') %>
+
+    <div class="container">
+      <% if (locals.blogs && blogs.length > 0) { %>
+      <div class="row">
+        <% blogs.forEach(blog => { %>
+        <div class="col-md-4 my-2">
+          <div class="card w-100" style="width: 18rem">
+            <div class="img-container py-2">
+              <img
+                src="/uploads/<%- blog.coverImage %>"
+                class="card-img-top w-100"
+                alt="..."
+              />
+            </div>
+            <div class="card-body px-2 pb-3">
+              <h5 class="card-title m-0">
+                <%- blog.title.slice(0,20)%> <% if (blog.title.length > 20) { %>
+                <span>...</span>
+                <% } %>
+              </h5>
+              <div class="d-flex align items-center gap-3 my-1">
+                <p><%-blog.views%> view(s)</p>
+                <p class="m-0"><%-createTimeStamp(blog.createdAt)%></p>
+              </div>
+              <a href="/blog/view/<%-blog._id%>" class="btn btn-primary"
+                >View</a
+              >
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      <% } else {%>
+      <h2 class="text-center my-5">No Blogs Available !</h2>
+      <% } %>
+    </div>
+
+    <!-- Bootsrap JS cdn -->
+    <%- include('./partials/js/bootstrap.ejs') %>
+  </body>
+</html>

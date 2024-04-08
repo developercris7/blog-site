@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/css/bootstrap.ejs') %>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blogs</title>
+  </head>
+  <body>
+    <%- include('./partials/components/nav.ejs') %>
+
+    <div class="container">
+      <% if(locals.user && locals.user.role === "Admin"){ %>
+      <button class="btn btn-danger">
+        <a href="/blog/delete/<%=blog._id%>" class="nav-link">Delete</a>
+      </button>
+      <% } %>
+
+      <div class="text-center">
+        <img src="/uploads/<%=blog.coverImage %>" alt="..." width="60%" />
+        <h4><%=blog.title %></h4>
+      </div>
+      <div class="d-flex align items-center gap-3 my-1">
+        <p><%-blog.views%> view(s)</p>
+        <p class="m-0"><%-createTimeStamp(blog.createdAt)%></p>
+      </div>
+      <p><%=blog.body %></p>
+      <h5>Created By : <%= blog.createdBy.fullName %></h5>
+      <% if (locals.user) { %>
+      <input
+        type="text"
+        id="comment-input"
+        placeholder="Enter your comment here..."
+        class="form-control"
+      />
+      <button class="btn btn-success my-3" type="submit" id="submitBtn">
+        Save
+      </button>
+      <% } else {%>
+      <p>Please ! Login to your account to post your own comments !</p>
+      <% } %>
+
+      <h2>Commands (<%= comments.length %>)</h2>
+
+      <div class="container">
+        <% comments.forEach(comment=> { %>
+        <h6><%- comment.createdBy.fullName %> : <%- comment.content %></h6>
+        <% }) %>
+      </div>
+    </div>
+    <!-- Bootsrap JS cdn -->
+    <%- include('./partials/js/bootstrap.ejs') %>
+
+    <script>
+      let input = document.getElementById("comment-input");
+      let submit = document.getElementById("submitBtn");
+
+      submit.addEventListener("click", async () => {
+        const response = await fetch("/comment/create", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            blogId: "<%=blog._id%>",
+            content: input.value,
+          }),
+        });
+        window.location.reload();
+      });
+    </script>
+  </body>
+</html>
