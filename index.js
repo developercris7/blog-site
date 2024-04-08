@@ -4,7 +4,7 @@ const dotenv = require('dotenv')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const connectToDb = require('./connectDb')
-const cors = = require('cors')
+const cors = require('cors')
 const path = require('path')
 const app = express()
 
