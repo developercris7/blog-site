@@ -55,10 +55,16 @@
            <a class="navbar-brand d-flex align-items-center gap-2" href="/"> <i class="fa-solid fa-blog fs-2"></i><span>Blogs World</span></a>
 
       <div class="d-none d-md-flex align-items-center text-white justify-content-between">
-        <a class="nav-link mx-2" href="/"><i class="fa-solid fa-house mx-1"></i>Home</a>
+        <% if(locals.user) {%>
+            <a class="nav-link mx-2" href="/"><i class="fa-solid fa-house mx-1"></i>Home</a>
 
-        <a class="nav-link mx-2" href="/blog/create"><i class="fa-solid fa-plus mx-1"></i>Create Blog</a>
-      <a class="nav-link mx-2" href="/user/blogs"><i class="fa-solid fa-grip mx-1"></i>My blogs</a>
+            <a class="nav-link mx-2" href="/blog/create"><i class="fa-solid fa-plus mx-1"></i>Create Blog</a>
+          <a class="nav-link mx-2" href="/user/blogs"><i class="fa-solid fa-grip mx-1"></i>My blogs</a>
+            <% }else{ %>
+                <a class="nav-link mx-2" href="/login"><i class="fa-solid fa-right-from-bracket mx-2"></i>Login / Signup</a>
+
+                <% } %>
+       
       </div>
     </div>
   </div>

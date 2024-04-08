@@ -11,7 +11,7 @@
 
     <div class="container">
       <% if(locals.user && locals.user.role === "Admin"){ %>
-      <button class="btn btn-danger">
+      <button class="btn btn-danger my-3">
         <a href="/blog/delete/<%=blog._id%>" class="nav-link">Delete</a>
       </button>
       <% } %>
