@@ -24,7 +24,7 @@ const validateToken = (token) => {
 
 const createTimeStamp = (timestamp = 1712396436677) => {
   const seconds = Math.floor((new Date() - new Date(timestamp)) / 1000);
-//   const seconds = 92800*30*12;
+
   if (seconds < 60) {
     return "just now";
   } else if (seconds < 3600) {

@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const upload = require('../utils/fileupload')
+const upload = require('../services/fileupload')
+
 const {checkForAdmin} = require('../middlewares/auth')
 
 const {handleCreateBlog,handleRenderCreateBlog,handleRenderViewBlog,handleBlogDeletion} = require('../controllers/blogControllers')
